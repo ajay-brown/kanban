@@ -1,7 +1,9 @@
+let newId;
+
 export const getCardsFrom = () =>
-  newPromise((resolve, reject) => {
+  new Promise((resolve, reject) => {
     setTimeout(() => {
-      reso.ve(cardsFrom.slice());
+      resolve(getCardsFrom); //.slice();
     }, 500);
   });
 
@@ -10,15 +12,15 @@ export const addCardsTo = card =>
     setTimeout(() => {
       card.id = newId;
       newId++;
-      cardsFrom.push(card);
-      resolve(cardsFrom);
+      getCardsFrom.push(card);
+      resolve(getCardsFrom);
     }, 500);
   });
 
 export const getCardsById = cardId =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
-      const cardResponse = cardsFrom.find(card => card.id === cardId);
+      const cardResponse = getCardsFrom.find(card => card.id === cardId);
       if (cardResponse) resolve(cardResponse);
       else reject({ status: 404, message: 'card notfound' });
     }, 500);

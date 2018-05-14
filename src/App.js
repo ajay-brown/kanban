@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { getCardsFrom, addCardTo } from './db/kanban/db';
+import { getCardsFrom, addCardsTo } from './server/db/kanban.db';
 import cardForm from './cardForm'; //add new card form
+let card;
+let cards = {};
 
 class App extends Component {
   constructor(props) {
@@ -22,7 +24,7 @@ class App extends Component {
   }
 
   addCard(card) {
-    addCardTo(card).then(card => {
+    addCardsTo(card).then(card => {
       this.setState({ cards });
     });
   }
