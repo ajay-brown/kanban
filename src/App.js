@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { getCardsFrom, addCardsTo } from './server/db/kanban.db';
-import cardForm from './cardForm'; //add new card form
-let card;
-let cards = {};
+import CardForm from './cardForm'; //add new card form
 
 class App extends Component {
   constructor(props) {
@@ -17,6 +15,7 @@ class App extends Component {
 
   componentDidMount() {
     getCardsFrom().then(cards => {
+      console.log('cards in componnent did mount', cards);
       this.setState({ cards }, () => {
         console.log('this.state', this.state);
       });
@@ -24,7 +23,7 @@ class App extends Component {
   }
 
   addCard(card) {
-    addCardsTo(card).then(card => {
+    addCardsTo(card).then(cards => {
       this.setState({ cards });
     });
   }
@@ -42,14 +41,16 @@ class App extends Component {
           <h1 className="App-title">Here's Your Cards:</h1>
         </header>
         <CardsList cards={cards} />
-        <cardForm addCard={this.addCard} />
+        <CardForm addCard={this.addCard} />
       </div>
     );
   }
 }
+React.createElement;
 
 function CardsList(props) {
-  return props.cards.map(item => <div> {card.name}</div>);
+  console.log('cardslist props', props.cards);
+  return props.cards.map(card => <div key={card.id}> {card.name}</div>);
 }
 
 export default App;
